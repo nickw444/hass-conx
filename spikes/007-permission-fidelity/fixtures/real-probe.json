@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-08-30",
+  "results": [
+    {
+      "schemaVersion": 1,
+      "provider": "codex",
+      "mode": "isolated-unauthenticated-probe",
+      "command": "/Users/nickw/repos/hass-conx/spikes/007-permission-fidelity/node_modules/@agentclientprotocol/codex-acp/dist/index.js",
+      "args": [],
+      "runtime": {
+        "node": "v26.0.0",
+        "platform": "darwin",
+        "arch": "arm64",
+        "sdk": "@agentclientprotocol/sdk@1.4.0",
+        "isolatedHome": true,
+        "authenticateCalled": false,
+        "credentialEnvironmentForwarded": false
+      },
+      "tests": {
+        "initialize": {
+          "status": "passed",
+          "protocolVersion": 1,
+          "agentInfo": {
+            "name": "@agentclientprotocol/codex-acp",
+            "title": "Codex",
+            "version": "1.7.0"
+          },
+          "agentCapabilities": {
+            "auth": {
+              "logout": {}
+            },
+            "providers": {},
+            "loadSession": true,
+            "promptCapabilities": {
+              "embeddedContext": true,
+              "image": true
+            },
+            "sessionCapabilities": {
+              "resume": {},
+              "list": {},
+              "close": {},
+              "delete": {},
+              "additionalDirectories": {},
+              "subagents": {}
+            },
+            "mcpCapabilities": {
+              "acp": false,
+              "http": true,
+              "sse": false
+            }
+          },
+          "authMethods": [
+            {
+              "id": "api-key",
+              "name": "API Key",
+              "description": "Use an API key to authenticate",
+              "_meta": {
+                "api-key": "[REDACTED]"
+              }
+            }
+          ]
+        },
+        "sessionNew": {
+          "status": "blocked-or-failed",
+          "error": "RequestError: Authentication required",
+          "interpretation": "No authenticate call was made; this records the provider's unauthenticated gate."
+        }
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "provider": "cursor",
+      "mode": "isolated-unauthenticated-probe",
+      "command": "/Users/nickw/.local/bin/agent",
+      "args": [
+        "acp"
+      ],
+      "runtime": {
+        "node": "v26.0.0",
+        "platform": "darwin",
+        "arch": "arm64",
+        "sdk": "@agentclientprotocol/sdk@1.4.0",
+        "isolatedHome": true,
+        "authenticateCalled": false,
+        "credentialEnvironmentForwarded": false
+      },
+      "tests": {
+        "initialize": {
+          "status": "passed",
+          "protocolVersion": 1,
+          "agentCapabilities": {
+            "loadSession": true,
+            "mcpCapabilities": {
+              "http": true,
+              "sse": true
+            },
+            "promptCapabilities": {
+              "audio": false,
+              "embeddedContext": false,
+              "image": true
+            },
+            "sessionCapabilities": {
+              "list": {}
+            }
+          },
+          "authMethods": [
+            {
+              "id": "cursor_login",
+              "name": "Cursor Login",
+              "description": "Authenticate using existing Cursor login credentials. Run 'agent login' first if not logged in."
+            }
+          ]
+        },
+        "sessionNew": {
+          "status": "blocked-or-failed",
+          "error": "RequestError: Authentication required",
+          "interpretation": "No authenticate call was made; this records the provider's unauthenticated gate."
+        }
+      }
+    }
+  ]
+}

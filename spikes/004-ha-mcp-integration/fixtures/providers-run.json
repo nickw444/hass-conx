@@ -1,0 +1,237 @@
+{
+  "runtime": {
+    "node": "v26.0.0",
+    "platform": "darwin",
+    "arch": "arm64",
+    "acpSdk": "@agentclientprotocol/sdk@1.4.0"
+  },
+  "providerMcpServers": [
+    {
+      "type": "http",
+      "name": "homeassistant-assist",
+      "url": "http://127.0.0.1:56690/homeassistant-assist",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer [REDACTED]"
+        }
+      ]
+    },
+    {
+      "type": "http",
+      "name": "homeassistant-advanced",
+      "url": "http://127.0.0.1:56690/homeassistant-advanced",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer [REDACTED]"
+        }
+      ]
+    }
+  ],
+  "providers": {
+    "codex": {
+      "schemaVersion": 1,
+      "provider": "codex",
+      "mode": "real-provider",
+      "command": "/Users/nickw/repos/hass-conx/spikes/004-ha-mcp-integration/node_modules/@agentclientprotocol/codex-acp/dist/index.js",
+      "args": [],
+      "runtime": {
+        "node": "v26.0.0",
+        "platform": "darwin",
+        "arch": "arm64",
+        "providerBinaryPresent": true,
+        "isolatedHome": true,
+        "processExit": {
+          "code": null,
+          "signal": "SIGTERM"
+        }
+      },
+      "providerMcpServers": [
+        {
+          "type": "http",
+          "name": "homeassistant-assist",
+          "url": "http://127.0.0.1:56690/homeassistant-assist",
+          "headers": [
+            {
+              "name": "Authorization",
+              "value": "Bearer [REDACTED]"
+            }
+          ]
+        },
+        {
+          "type": "http",
+          "name": "homeassistant-advanced",
+          "url": "http://127.0.0.1:56690/homeassistant-advanced",
+          "headers": [
+            {
+              "name": "Authorization",
+              "value": "Bearer [REDACTED]"
+            }
+          ]
+        }
+      ],
+      "tests": {
+        "initialize": {
+          "status": "passed",
+          "protocolVersion": 1,
+          "agentInfo": {
+            "name": "@agentclientprotocol/codex-acp",
+            "title": "Codex",
+            "version": "1.7.0"
+          },
+          "agentCapabilities": {
+            "auth": {
+              "logout": {}
+            },
+            "providers": {},
+            "loadSession": true,
+            "promptCapabilities": {
+              "embeddedContext": true,
+              "image": true
+            },
+            "sessionCapabilities": {
+              "resume": {},
+              "list": {},
+              "close": {},
+              "delete": {},
+              "additionalDirectories": {},
+              "subagents": {}
+            },
+            "mcpCapabilities": {
+              "acp": false,
+              "http": true,
+              "sse": false
+            }
+          }
+        },
+        "authStatus": {
+          "status": "observed",
+          "authMethods": [
+            {
+              "id": "api-key",
+              "name": "API Key",
+              "description": "Use an API key to authenticate",
+              "_meta": {
+                "api-key": {
+                  "provider": "openai"
+                }
+              }
+            },
+            {
+              "id": "chat-gpt-device-code",
+              "name": "ChatGPT (device code)",
+              "description": "Sign in to ChatGPT by opening a verification page and entering a one-time code"
+            }
+          ]
+        },
+        "sessionNew": {
+          "status": "blocked-or-failed",
+          "error": "RequestError: Authentication required"
+        },
+        "mcpInjection": {
+          "status": "inconclusive",
+          "reason": "session/new failed before provider MCP acceptance could be distinguished",
+          "error": "RequestError: Authentication required"
+        }
+      }
+    },
+    "cursor": {
+      "schemaVersion": 1,
+      "provider": "cursor",
+      "mode": "real-provider",
+      "command": "/Users/nickw/.local/bin/agent",
+      "args": [
+        "acp"
+      ],
+      "runtime": {
+        "node": "v26.0.0",
+        "platform": "darwin",
+        "arch": "arm64",
+        "providerBinaryPresent": true,
+        "isolatedHome": true,
+        "processExit": {
+          "code": 143,
+          "signal": null
+        }
+      },
+      "providerMcpServers": [
+        {
+          "type": "http",
+          "name": "homeassistant-assist",
+          "url": "http://127.0.0.1:56690/homeassistant-assist",
+          "headers": [
+            {
+              "name": "Authorization",
+              "value": "Bearer [REDACTED]"
+            }
+          ]
+        },
+        {
+          "type": "http",
+          "name": "homeassistant-advanced",
+          "url": "http://127.0.0.1:56690/homeassistant-advanced",
+          "headers": [
+            {
+              "name": "Authorization",
+              "value": "Bearer [REDACTED]"
+            }
+          ]
+        }
+      ],
+      "tests": {
+        "initialize": {
+          "status": "passed",
+          "protocolVersion": 1,
+          "agentCapabilities": {
+            "loadSession": true,
+            "mcpCapabilities": {
+              "http": true,
+              "sse": true
+            },
+            "promptCapabilities": {
+              "audio": false,
+              "embeddedContext": false,
+              "image": true
+            },
+            "sessionCapabilities": {
+              "list": {}
+            }
+          }
+        },
+        "authStatus": {
+          "status": "observed",
+          "authMethods": [
+            {
+              "id": "cursor_login",
+              "name": "Cursor Login",
+              "description": "Authenticate using existing Cursor login credentials. Run 'agent login' first if not logged in."
+            }
+          ]
+        },
+        "sessionNew": {
+          "status": "blocked-or-failed",
+          "error": "RequestError: Authentication required"
+        },
+        "mcpInjection": {
+          "status": "inconclusive",
+          "reason": "session/new failed before provider MCP acceptance could be distinguished",
+          "error": "RequestError: Authentication required"
+        }
+      }
+    }
+  },
+  "trace": [
+    {
+      "component": "broker",
+      "event": "provider_probe",
+      "forwarded": true
+    },
+    {
+      "component": "broker",
+      "event": "provider_probe",
+      "forwarded": true
+    }
+  ],
+  "manualAuthenticationRequired": true
+}

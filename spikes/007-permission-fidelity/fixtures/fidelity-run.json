@@ -1,0 +1,835 @@
+{
+  "schemaVersion": 1,
+  "provider": "fixture",
+  "mode": "deterministic-official-sdk",
+  "runtime": {
+    "node": "v26.0.0",
+    "platform": "darwin",
+    "arch": "arm64",
+    "sdk": "@agentclientprotocol/sdk@1.4.0"
+  },
+  "tests": {
+    "initialize": {
+      "status": "passed",
+      "protocolVersion": 1,
+      "agentCapabilities": {
+        "loadSession": true,
+        "promptCapabilities": {
+          "image": false,
+          "audio": false,
+          "embeddedContext": true
+        },
+        "mcpCapabilities": {
+          "http": true,
+          "sse": false
+        },
+        "sessionCapabilities": {
+          "resume": {},
+          "list": {}
+        }
+      }
+    },
+    "sessionNew": {
+      "status": "passed",
+      "sessionId": "fidelity-session"
+    },
+    "directAcpFilesystemEdit": {
+      "status": "passed",
+      "rpcPaths": [
+        "<workspace>/direct-acp.txt",
+        "<workspace>/.storage/core.config_entries"
+      ]
+    },
+    "directStorageEdit": {
+      "status": "passed",
+      "rpcPaths": [
+        "<workspace>/.storage/core.config_entries"
+      ]
+    },
+    "shellCommands": {
+      "status": "passed",
+      "changedBySnapshot": [
+        "shell-created.txt",
+        "shell-modified.txt",
+        "shell-deleted.txt"
+      ],
+      "terminalCreates": [
+        {
+          "title": "terminal-1",
+          "command": "/bin/sh",
+          "args": [
+            "-c",
+            "printf 'harmless-command\\n'"
+          ]
+        },
+        {
+          "title": "terminal-2",
+          "command": "/bin/sh",
+          "args": [
+            "-c",
+            "printf 'created-by-shell\\n' > shell-created.txt; printf 'modified-by-shell\\n' > shell-modified.txt; rm -f shell-deleted.txt"
+          ]
+        }
+      ]
+    },
+    "permission": {
+      "status": "passed",
+      "requests": [
+        {
+          "sessionId": "fidelity-session",
+          "toolCallId": "tool-shell-mutator",
+          "title": "Destructive-labelled shell command (fixture workspace only)",
+          "kind": "execute",
+          "options": [
+            {
+              "optionId": "allow-once",
+              "kind": "allow_once",
+              "name": "Allow once"
+            },
+            {
+              "optionId": "allow-always",
+              "kind": "allow_always",
+              "name": "Always allow"
+            },
+            {
+              "optionId": "reject-once",
+              "kind": "reject_once",
+              "name": "Reject"
+            },
+            {
+              "optionId": "reject-always",
+              "kind": "reject_always",
+              "name": "Always reject"
+            }
+          ]
+        }
+      ],
+      "resolutions": [
+        {
+          "sessionId": "fidelity-session",
+          "toolCallId": "tool-shell-mutator",
+          "optionId": "allow-once"
+        }
+      ]
+    },
+    "mcp": {
+      "status": "passed",
+      "calls": [
+        {
+          "method": "tools/call",
+          "name": "read_state",
+          "arguments": {}
+        },
+        {
+          "method": "tools/call",
+          "name": "write_state",
+          "arguments": {
+            "content": "temporarily-written-by-mcp\n"
+          }
+        },
+        {
+          "method": "tools/call",
+          "name": "write_state",
+          "arguments": {
+            "content": "seed\n"
+          }
+        }
+      ]
+    },
+    "diffsAndLocations": {
+      "status": "passed"
+    },
+    "terminalOutput": {
+      "status": "passed"
+    },
+    "prompt": {
+      "status": "passed",
+      "stopReason": "end_turn"
+    },
+    "cancellation": {
+      "status": "passed",
+      "stopReason": "cancelled",
+      "wireMethod": "session/cancel"
+    },
+    "disconnectPendingPermission": {
+      "status": "passed",
+      "pending": {
+        "sessionId": "fidelity-session",
+        "toolCallId": "tool-pending-disconnect",
+        "title": "Pending destructive action",
+        "kind": "execute",
+        "options": [
+          {
+            "optionId": "allow-once",
+            "kind": "allow_once",
+            "name": "Allow once"
+          },
+          {
+            "optionId": "reject-once",
+            "kind": "reject_once",
+            "name": "Reject"
+          }
+        ]
+      },
+      "resolutionCount": 0,
+      "processExit": {
+        "code": null,
+        "signal": "SIGTERM"
+      },
+      "rule": "close/reap without auto-approval"
+    }
+  },
+  "events": [
+    {
+      "sequence": 1,
+      "sessionId": "fidelity-session",
+      "source": "acp.session.update",
+      "kind": "tool.started",
+      "data": {
+        "toolCallId": "tool-direct-fs",
+        "title": "Direct ACP filesystem edit",
+        "kind": "edit",
+        "status": "in_progress",
+        "locations": [
+          {
+            "path": "<workspace>/direct-acp.txt",
+            "line": 1
+          }
+        ],
+        "contentTypes": [],
+        "rawInput": {
+          "path": "<workspace>/direct-acp.txt"
+        },
+        "rawOutput": null
+      }
+    },
+    {
+      "sequence": 2,
+      "sessionId": "fidelity-session",
+      "kind": "file.changed",
+      "data": {
+        "method": "fs/write_text_file",
+        "path": "<workspace>/direct-acp.txt",
+        "contentLength": 17
+      },
+      "source": "acp.client.rpc"
+    },
+    {
+      "sequence": 3,
+      "sessionId": "fidelity-session",
+      "source": "acp.session.update",
+      "kind": "tool.completed",
+      "data": {
+        "toolCallId": "tool-direct-fs",
+        "title": null,
+        "status": "completed",
+        "locations": [
+          {
+            "path": "<workspace>/direct-acp.txt",
+            "line": 1
+          }
+        ],
+        "contentTypes": [
+          "diff"
+        ],
+        "rawInput": null,
+        "rawOutput": null
+      }
+    },
+    {
+      "sequence": 4,
+      "sessionId": "fidelity-session",
+      "source": "acp.session.update",
+      "kind": "tool.started",
+      "data": {
+        "toolCallId": "tool-storage-fs",
+        "title": "Direct .storage-style edit",
+        "kind": "edit",
+        "status": "in_progress",
+        "locations": [
+          {
+            "path": "<workspace>/.storage/core.config_entries",
+            "line": 1
+          }
+        ],
+        "contentTypes": [],
+        "rawInput": {
+          "path": "<workspace>/.storage/core.config_entries"
+        },
+        "rawOutput": null
+      }
+    },
+    {
+      "sequence": 5,
+      "sessionId": "fidelity-session",
+      "kind": "file.changed",
+      "data": {
+        "method": "fs/write_text_file",
+        "path": "<workspace>/.storage/core.config_entries",
+        "contentLength": 29
+      },
+      "source": "acp.client.rpc"
+    },
+    {
+      "sequence": 6,
+      "sessionId": "fidelity-session",
+      "source": "acp.session.update",
+      "kind": "tool.completed",
+      "data": {
+        "toolCallId": "tool-storage-fs",
+        "title": null,
+        "status": "completed",
+        "locations": [
+          {
+            "path": "<workspace>/.storage/core.config_entries",
+            "line": 1
+          }
+        ],
+        "contentTypes": [
+          "diff"
+        ],
+        "rawInput": null,
+        "rawOutput": null
+      }
+    },
+    {
+      "sequence": 7,
+      "sessionId": "fidelity-session",
+      "kind": "terminal.started",
+      "data": {
+        "method": "terminal/create",
+        "terminalId": "terminal-1",
+        "command": "/bin/sh",
+        "args": [
+          "-c",
+          "printf 'harmless-command\\n'"
+        ]
+      },
+      "source": "acp.client.rpc"
+    },
+    {
+      "sequence": 8,
+      "sessionId": "fidelity-session",
+      "source": "acp.session.update",
+      "kind": "tool.started",
+      "data": {
+        "toolCallId": "tool-shell-harmless",
+        "title": null,
+        "status": "in_progress",
+        "locations": [],
+        "contentTypes": [
+          "terminal"
+        ],
+        "rawInput": null,
+        "rawOutput": null
+      }
+    },
+    {
+      "sequence": 9,
+      "sessionId": "fidelity-session",
+      "kind": "terminal.completed",
+      "data": {
+        "method": "terminal/wait_for_exit",
+        "terminalId": "terminal-1",
+        "exitCode": 0,
+        "signal": null
+      },
+      "source": "acp.client.rpc"
+    },
+    {
+      "sequence": 10,
+      "sessionId": "fidelity-session",
+      "kind": "terminal.output",
+      "data": {
+        "method": "terminal/output",
+        "terminalId": "terminal-1",
+        "output": "harmless-command\n",
+        "truncated": false,
+        "exitStatus": {
+          "exitCode": 0,
+          "signal": null
+        }
+      },
+      "source": "acp.client.rpc"
+    },
+    {
+      "sequence": 11,
+      "sessionId": "fidelity-session",
+      "kind": "terminal.completed",
+      "data": {
+        "method": "terminal/release",
+        "terminalId": "terminal-1"
+      },
+      "source": "acp.client.rpc"
+    },
+    {
+      "sequence": 12,
+      "sessionId": "fidelity-session",
+      "source": "acp.session.update",
+      "kind": "tool.started",
+      "data": {
+        "toolCallId": "tool-shell-mutator",
+        "title": "Destructive-labelled shell command (fixture workspace only)",
+        "kind": "execute",
+        "status": "pending",
+        "locations": [],
+        "contentTypes": [],
+        "rawInput": {
+          "command": "/bin/sh",
+          "args": [
+            "-c",
+            "create/modify/delete fixture files"
+          ]
+        },
+        "rawOutput": null
+      }
+    },
+    {
+      "sequence": 13,
+      "sessionId": "fidelity-session",
+      "kind": "permission.requested",
+      "data": {
+        "sessionId": "fidelity-session",
+        "toolCallId": "tool-shell-mutator",
+        "title": "Destructive-labelled shell command (fixture workspace only)",
+        "kind": "execute",
+        "options": [
+          {
+            "optionId": "allow-once",
+            "kind": "allow_once",
+            "name": "Allow once"
+          },
+          {
+            "optionId": "allow-always",
+            "kind": "allow_always",
+            "name": "Always allow"
+          },
+          {
+            "optionId": "reject-once",
+            "kind": "reject_once",
+            "name": "Reject"
+          },
+          {
+            "optionId": "reject-always",
+            "kind": "reject_always",
+            "name": "Always reject"
+          }
+        ]
+      },
+      "source": "acp.client.rpc"
+    },
+    {
+      "sequence": 14,
+      "sessionId": "fidelity-session",
+      "kind": "permission.resolved",
+      "data": {
+        "sessionId": "fidelity-session",
+        "toolCallId": "tool-shell-mutator",
+        "optionId": "allow-once"
+      },
+      "source": "acp.client.rpc"
+    },
+    {
+      "sequence": 15,
+      "sessionId": "fidelity-session",
+      "kind": "terminal.started",
+      "data": {
+        "method": "terminal/create",
+        "terminalId": "terminal-2",
+        "command": "/bin/sh",
+        "args": [
+          "-c",
+          "printf 'created-by-shell\\n' > shell-created.txt; printf 'modified-by-shell\\n' > shell-modified.txt; rm -f shell-deleted.txt"
+        ]
+      },
+      "source": "acp.client.rpc"
+    },
+    {
+      "sequence": 16,
+      "sessionId": "fidelity-session",
+      "source": "acp.session.update",
+      "kind": "tool.started",
+      "data": {
+        "toolCallId": "tool-shell-destructive-mutator",
+        "title": null,
+        "status": "in_progress",
+        "locations": [],
+        "contentTypes": [
+          "terminal"
+        ],
+        "rawInput": null,
+        "rawOutput": null
+      }
+    },
+    {
+      "sequence": 17,
+      "sessionId": "fidelity-session",
+      "kind": "terminal.completed",
+      "data": {
+        "method": "terminal/wait_for_exit",
+        "terminalId": "terminal-2",
+        "exitCode": 0,
+        "signal": null
+      },
+      "source": "acp.client.rpc"
+    },
+    {
+      "sequence": 18,
+      "sessionId": "fidelity-session",
+      "kind": "terminal.output",
+      "data": {
+        "method": "terminal/output",
+        "terminalId": "terminal-2",
+        "output": "",
+        "truncated": false,
+        "exitStatus": {
+          "exitCode": 0,
+          "signal": null
+        }
+      },
+      "source": "acp.client.rpc"
+    },
+    {
+      "sequence": 19,
+      "sessionId": "fidelity-session",
+      "kind": "terminal.completed",
+      "data": {
+        "method": "terminal/release",
+        "terminalId": "terminal-2"
+      },
+      "source": "acp.client.rpc"
+    },
+    {
+      "sequence": 20,
+      "sessionId": "fidelity-session",
+      "source": "acp.session.update",
+      "kind": "tool.completed",
+      "data": {
+        "toolCallId": "tool-shell-mutator",
+        "title": null,
+        "status": "completed",
+        "locations": [],
+        "contentTypes": [],
+        "rawInput": null,
+        "rawOutput": {
+          "exitCode": 0
+        }
+      }
+    },
+    {
+      "sequence": 21,
+      "sessionId": "fidelity-session",
+      "source": "acp.session.update",
+      "kind": "tool.started",
+      "data": {
+        "toolCallId": "tool-mcp-read",
+        "title": "MCP read",
+        "kind": "read",
+        "status": "in_progress",
+        "locations": [],
+        "contentTypes": [],
+        "rawInput": {
+          "server": "fixture-mcp",
+          "tool": "read_state",
+          "arguments": {}
+        },
+        "rawOutput": null
+      }
+    },
+    {
+      "sequence": 22,
+      "sessionId": "fidelity-session",
+      "source": "acp.session.update",
+      "kind": "tool.completed",
+      "data": {
+        "toolCallId": "tool-mcp-read",
+        "title": null,
+        "status": "completed",
+        "locations": [],
+        "contentTypes": [],
+        "rawInput": null,
+        "rawOutput": {
+          "valueLength": 5
+        }
+      }
+    },
+    {
+      "sequence": 23,
+      "sessionId": "fidelity-session",
+      "source": "acp.session.update",
+      "kind": "tool.started",
+      "data": {
+        "toolCallId": "tool-mcp-write",
+        "title": "MCP reversible write",
+        "kind": "edit",
+        "status": "in_progress",
+        "locations": [],
+        "contentTypes": [],
+        "rawInput": {
+          "server": "fixture-mcp",
+          "tool": "write_state",
+          "reversible": true
+        },
+        "rawOutput": null
+      }
+    },
+    {
+      "sequence": 24,
+      "sessionId": "fidelity-session",
+      "source": "acp.session.update",
+      "kind": "tool.completed",
+      "data": {
+        "toolCallId": "tool-mcp-write",
+        "title": null,
+        "status": "completed",
+        "locations": [],
+        "contentTypes": [],
+        "rawInput": null,
+        "rawOutput": {
+          "changed": true,
+          "restored": true
+        }
+      }
+    },
+    {
+      "sequence": 25,
+      "sessionId": "fidelity-session",
+      "source": "acp.session.update",
+      "kind": "message.delta",
+      "data": {
+        "role": "assistant",
+        "text": "fixture complete",
+        "messageId": "result-message"
+      }
+    },
+    {
+      "sequence": 26,
+      "sessionId": "fidelity-session",
+      "source": "acp.session.update",
+      "kind": "message.delta",
+      "data": {
+        "role": "assistant",
+        "text": "waiting",
+        "messageId": "cancel-message"
+      }
+    },
+    {
+      "sequence": 27,
+      "sessionId": "fidelity-session",
+      "source": "acp.session.update",
+      "kind": "tool.started",
+      "data": {
+        "toolCallId": "tool-pending-disconnect",
+        "title": "Pending destructive action",
+        "kind": "execute",
+        "status": "pending",
+        "locations": [],
+        "contentTypes": [],
+        "rawInput": {
+          "command": "destructive-labelled"
+        },
+        "rawOutput": null
+      }
+    },
+    {
+      "sequence": 28,
+      "sessionId": "fidelity-session",
+      "kind": "permission.requested",
+      "data": {
+        "sessionId": "fidelity-session",
+        "toolCallId": "tool-pending-disconnect",
+        "title": "Pending destructive action",
+        "kind": "execute",
+        "options": [
+          {
+            "optionId": "allow-once",
+            "kind": "allow_once",
+            "name": "Allow once"
+          },
+          {
+            "optionId": "reject-once",
+            "kind": "reject_once",
+            "name": "Reject"
+          }
+        ]
+      },
+      "source": "acp.client.rpc"
+    }
+  ],
+  "clientRpcs": [
+    {
+      "method": "fs/write_text_file",
+      "sessionId": "fidelity-session",
+      "path": "<workspace>/direct-acp.txt",
+      "contentLength": 17
+    },
+    {
+      "method": "fs/write_text_file",
+      "sessionId": "fidelity-session",
+      "path": "<workspace>/.storage/core.config_entries",
+      "contentLength": 29
+    },
+    {
+      "method": "terminal/create",
+      "sessionId": "fidelity-session",
+      "terminalId": "terminal-1",
+      "command": "/bin/sh",
+      "args": [
+        "-c",
+        "printf 'harmless-command\\n'"
+      ],
+      "cwd": "<workspace>"
+    },
+    {
+      "method": "terminal/wait_for_exit",
+      "sessionId": "fidelity-session",
+      "terminalId": "terminal-1",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "method": "terminal/output",
+      "sessionId": "fidelity-session",
+      "terminalId": "terminal-1",
+      "truncated": false,
+      "exitStatus": {
+        "exitCode": 0,
+        "signal": null
+      }
+    },
+    {
+      "method": "terminal/release",
+      "sessionId": "fidelity-session",
+      "terminalId": "terminal-1"
+    },
+    {
+      "method": "terminal/create",
+      "sessionId": "fidelity-session",
+      "terminalId": "terminal-2",
+      "command": "/bin/sh",
+      "args": [
+        "-c",
+        "printf 'created-by-shell\\n' > shell-created.txt; printf 'modified-by-shell\\n' > shell-modified.txt; rm -f shell-deleted.txt"
+      ],
+      "cwd": "<workspace>"
+    },
+    {
+      "method": "terminal/wait_for_exit",
+      "sessionId": "fidelity-session",
+      "terminalId": "terminal-2",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "method": "terminal/output",
+      "sessionId": "fidelity-session",
+      "terminalId": "terminal-2",
+      "truncated": false,
+      "exitStatus": {
+        "exitCode": 0,
+        "signal": null
+      }
+    },
+    {
+      "method": "terminal/release",
+      "sessionId": "fidelity-session",
+      "terminalId": "terminal-2"
+    }
+  ],
+  "mcpCalls": [
+    {
+      "method": "tools/call",
+      "name": "read_state",
+      "arguments": {}
+    },
+    {
+      "method": "tools/call",
+      "name": "write_state",
+      "arguments": {
+        "content": "temporarily-written-by-mcp\n"
+      }
+    },
+    {
+      "method": "tools/call",
+      "name": "write_state",
+      "arguments": {
+        "content": "seed\n"
+      }
+    }
+  ],
+  "workspace": {
+    "before": {
+      "direct-acp.txt": null,
+      ".storage/core.config_entries": "{\"version\":1}\n",
+      "shell-created.txt": null,
+      "shell-modified.txt": "before-shell\n",
+      "shell-deleted.txt": "delete-me\n",
+      "mcp-state.json": "seed\n"
+    },
+    "after": {
+      "direct-acp.txt": "after-direct-acp\n",
+      ".storage/core.config_entries": "{\"version\":2,\"fixture\":true}\n",
+      "shell-created.txt": "created-by-shell\n",
+      "shell-modified.txt": "modified-by-shell\n",
+      "shell-deleted.txt": null,
+      "mcp-state.json": "seed\n"
+    },
+    "snapshotEvents": [
+      {
+        "sequence": 0,
+        "sessionId": "fidelity-session",
+        "kind": "file.changed",
+        "data": {
+          "path": "<workspace>/direct-acp.txt",
+          "before": null,
+          "after": "after-direct-acp\n"
+        },
+        "source": "external.snapshot"
+      },
+      {
+        "sequence": 0,
+        "sessionId": "fidelity-session",
+        "kind": "file.changed",
+        "data": {
+          "path": "<workspace>/.storage/core.config_entries",
+          "before": "{\"version\":1}\n",
+          "after": "{\"version\":2,\"fixture\":true}\n"
+        },
+        "source": "external.snapshot"
+      },
+      {
+        "sequence": 0,
+        "sessionId": "fidelity-session",
+        "kind": "file.changed",
+        "data": {
+          "path": "<workspace>/shell-created.txt",
+          "before": null,
+          "after": "created-by-shell\n"
+        },
+        "source": "external.snapshot"
+      },
+      {
+        "sequence": 0,
+        "sessionId": "fidelity-session",
+        "kind": "file.changed",
+        "data": {
+          "path": "<workspace>/shell-modified.txt",
+          "before": "before-shell\n",
+          "after": "modified-by-shell\n"
+        },
+        "source": "external.snapshot"
+      },
+      {
+        "sequence": 0,
+        "sessionId": "fidelity-session",
+        "kind": "file.changed",
+        "data": {
+          "path": "<workspace>/shell-deleted.txt",
+          "before": "delete-me\n",
+          "after": null
+        },
+        "source": "external.snapshot"
+      }
+    ]
+  }
+}

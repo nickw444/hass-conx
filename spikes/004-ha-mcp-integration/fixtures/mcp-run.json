@@ -1,0 +1,1213 @@
+{
+  "runtime": {
+    "node": "v26.0.0",
+    "platform": "darwin",
+    "arch": "arm64"
+  },
+  "protocol": {
+    "sdk": "@modelcontextprotocol/{server,node,client}@2.0.0",
+    "transport": "Streamable HTTP",
+    "mode": "stateless JSON response"
+  },
+  "upstream": {
+    "url": "http://127.0.0.1:56528/mcp",
+    "requiresSyntheticBearer": true,
+    "unauthorizedStatus": 401
+  },
+  "broker": {
+    "baseUrl": "http://127.0.0.1:56529",
+    "unauthorizedStatus": 401,
+    "localCapabilityInjectedByClient": true
+  },
+  "providerMcpServers": [
+    {
+      "type": "http",
+      "name": "homeassistant-assist",
+      "url": "http://127.0.0.1:56529/homeassistant-assist",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer [REDACTED]"
+        }
+      ]
+    },
+    {
+      "type": "http",
+      "name": "homeassistant-advanced",
+      "url": "http://127.0.0.1:56529/homeassistant-advanced",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer [REDACTED]"
+        }
+      ]
+    }
+  ],
+  "observed": {
+    "serverNames": [
+      "homeassistant-assist",
+      "homeassistant-advanced"
+    ],
+    "toolsList": [
+      "ha_read_test_state",
+      "ha_set_test_state"
+    ],
+    "readBefore": {
+      "enabled": false
+    },
+    "writeOn": {
+      "enabled": true
+    },
+    "readOn": {
+      "enabled": true
+    },
+    "writeOff": {
+      "enabled": false
+    },
+    "readAfter": {
+      "enabled": false
+    },
+    "firstHealth": {
+      "status": "ok",
+      "upstreamTools": [
+        "ha_read_test_state",
+        "ha_set_test_state"
+      ]
+    },
+    "upstreamDownHealth": {
+      "status": "degraded",
+      "errorClass": "TypeError"
+    },
+    "reconnectHealth": {
+      "status": "ok",
+      "upstreamTools": [
+        "ha_read_test_state",
+        "ha_set_test_state"
+      ]
+    },
+    "afterReconnect": {
+      "enabled": false
+    }
+  },
+  "assertions": {
+    "providerConfigContainsOnlyLocalCapability": true,
+    "upstreamTokenNeverInProviderConfig": true,
+    "upstreamAuthInjectedByBroker": true,
+    "reversibleWriteRestored": true,
+    "noSensitiveValuesInArtifact": true
+  },
+  "trace": [
+    {
+      "component": "upstream",
+      "event": "request",
+      "method": "GET",
+      "path": "/mcp",
+      "authorization": "absent"
+    },
+    {
+      "component": "upstream",
+      "event": "unauthorized",
+      "method": "GET",
+      "path": "/mcp",
+      "status": 401,
+      "authorization": "absent",
+      "authValid": false
+    },
+    {
+      "component": "broker",
+      "event": "request",
+      "method": "GET",
+      "path": "/homeassistant-assist",
+      "authorization": "absent"
+    },
+    {
+      "component": "broker",
+      "event": "unauthorized",
+      "method": "GET",
+      "path": "/homeassistant-assist",
+      "status": 401,
+      "authorization": "absent",
+      "authValid": false
+    },
+    {
+      "component": "broker",
+      "event": "upstream_client",
+      "upstreamAuthInjected": true,
+      "forwarded": true
+    },
+    {
+      "component": "upstream",
+      "event": "request",
+      "method": "POST",
+      "path": "/mcp",
+      "authorization": "present"
+    },
+    {
+      "component": "upstream",
+      "event": "accepted",
+      "method": "POST",
+      "path": "/mcp",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "upstream",
+      "event": "request",
+      "method": "POST",
+      "path": "/mcp",
+      "authorization": "present"
+    },
+    {
+      "component": "upstream",
+      "event": "accepted",
+      "method": "POST",
+      "path": "/mcp",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "upstream",
+      "event": "request",
+      "method": "GET",
+      "path": "/mcp",
+      "authorization": "present"
+    },
+    {
+      "component": "upstream",
+      "event": "accepted",
+      "method": "GET",
+      "path": "/mcp",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "upstream",
+      "event": "request",
+      "method": "POST",
+      "path": "/mcp",
+      "authorization": "present"
+    },
+    {
+      "component": "upstream",
+      "event": "accepted",
+      "method": "POST",
+      "path": "/mcp",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "broker",
+      "event": "request",
+      "method": "POST",
+      "path": "/homeassistant-assist",
+      "authorization": "present"
+    },
+    {
+      "component": "broker",
+      "event": "accepted",
+      "method": "POST",
+      "path": "/homeassistant-assist",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "broker",
+      "event": "request",
+      "method": "POST",
+      "path": "/homeassistant-assist",
+      "authorization": "present"
+    },
+    {
+      "component": "broker",
+      "event": "accepted",
+      "method": "POST",
+      "path": "/homeassistant-assist",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "broker",
+      "event": "request",
+      "method": "GET",
+      "path": "/homeassistant-assist",
+      "authorization": "present"
+    },
+    {
+      "component": "broker",
+      "event": "accepted",
+      "method": "GET",
+      "path": "/homeassistant-assist",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "broker",
+      "event": "request",
+      "method": "POST",
+      "path": "/homeassistant-assist",
+      "authorization": "present"
+    },
+    {
+      "component": "broker",
+      "event": "accepted",
+      "method": "POST",
+      "path": "/homeassistant-assist",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "broker",
+      "event": "request",
+      "method": "POST",
+      "path": "/homeassistant-assist",
+      "authorization": "present"
+    },
+    {
+      "component": "broker",
+      "event": "accepted",
+      "method": "POST",
+      "path": "/homeassistant-assist",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "broker",
+      "event": "request",
+      "method": "POST",
+      "path": "/homeassistant-assist",
+      "authorization": "present"
+    },
+    {
+      "component": "broker",
+      "event": "accepted",
+      "method": "POST",
+      "path": "/homeassistant-assist",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "broker",
+      "event": "request",
+      "method": "GET",
+      "path": "/homeassistant-assist",
+      "authorization": "present"
+    },
+    {
+      "component": "broker",
+      "event": "accepted",
+      "method": "GET",
+      "path": "/homeassistant-assist",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "broker",
+      "event": "request",
+      "method": "POST",
+      "path": "/homeassistant-assist",
+      "authorization": "present"
+    },
+    {
+      "component": "broker",
+      "event": "accepted",
+      "method": "POST",
+      "path": "/homeassistant-assist",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "broker",
+      "event": "upstream_client",
+      "upstreamAuthInjected": true,
+      "forwarded": true
+    },
+    {
+      "component": "upstream",
+      "event": "request",
+      "method": "POST",
+      "path": "/mcp",
+      "authorization": "present"
+    },
+    {
+      "component": "upstream",
+      "event": "accepted",
+      "method": "POST",
+      "path": "/mcp",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "upstream",
+      "event": "request",
+      "method": "POST",
+      "path": "/mcp",
+      "authorization": "present"
+    },
+    {
+      "component": "upstream",
+      "event": "accepted",
+      "method": "POST",
+      "path": "/mcp",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "upstream",
+      "event": "request",
+      "method": "GET",
+      "path": "/mcp",
+      "authorization": "present"
+    },
+    {
+      "component": "upstream",
+      "event": "accepted",
+      "method": "GET",
+      "path": "/mcp",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "upstream",
+      "event": "request",
+      "method": "POST",
+      "path": "/mcp",
+      "authorization": "present"
+    },
+    {
+      "component": "upstream",
+      "event": "accepted",
+      "method": "POST",
+      "path": "/mcp",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "broker",
+      "event": "request",
+      "method": "POST",
+      "path": "/homeassistant-assist",
+      "authorization": "present"
+    },
+    {
+      "component": "broker",
+      "event": "accepted",
+      "method": "POST",
+      "path": "/homeassistant-assist",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "broker",
+      "event": "request",
+      "method": "POST",
+      "path": "/homeassistant-assist",
+      "authorization": "present"
+    },
+    {
+      "component": "broker",
+      "event": "accepted",
+      "method": "POST",
+      "path": "/homeassistant-assist",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "broker",
+      "event": "request",
+      "method": "GET",
+      "path": "/homeassistant-assist",
+      "authorization": "present"
+    },
+    {
+      "component": "broker",
+      "event": "accepted",
+      "method": "GET",
+      "path": "/homeassistant-assist",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "broker",
+      "event": "request",
+      "method": "POST",
+      "path": "/homeassistant-assist",
+      "authorization": "present"
+    },
+    {
+      "component": "broker",
+      "event": "accepted",
+      "method": "POST",
+      "path": "/homeassistant-assist",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "broker",
+      "event": "upstream_client",
+      "upstreamAuthInjected": true,
+      "forwarded": true
+    },
+    {
+      "component": "upstream",
+      "event": "request",
+      "method": "POST",
+      "path": "/mcp",
+      "authorization": "present"
+    },
+    {
+      "component": "upstream",
+      "event": "accepted",
+      "method": "POST",
+      "path": "/mcp",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "upstream",
+      "event": "request",
+      "method": "POST",
+      "path": "/mcp",
+      "authorization": "present"
+    },
+    {
+      "component": "upstream",
+      "event": "accepted",
+      "method": "POST",
+      "path": "/mcp",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "upstream",
+      "event": "request",
+      "method": "GET",
+      "path": "/mcp",
+      "authorization": "present"
+    },
+    {
+      "component": "upstream",
+      "event": "accepted",
+      "method": "GET",
+      "path": "/mcp",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "upstream",
+      "event": "request",
+      "method": "POST",
+      "path": "/mcp",
+      "authorization": "present"
+    },
+    {
+      "component": "upstream",
+      "event": "accepted",
+      "method": "POST",
+      "path": "/mcp",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "broker",
+      "event": "request",
+      "method": "POST",
+      "path": "/homeassistant-assist",
+      "authorization": "present"
+    },
+    {
+      "component": "broker",
+      "event": "accepted",
+      "method": "POST",
+      "path": "/homeassistant-assist",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "broker",
+      "event": "request",
+      "method": "POST",
+      "path": "/homeassistant-assist",
+      "authorization": "present"
+    },
+    {
+      "component": "broker",
+      "event": "accepted",
+      "method": "POST",
+      "path": "/homeassistant-assist",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "broker",
+      "event": "request",
+      "method": "GET",
+      "path": "/homeassistant-assist",
+      "authorization": "present"
+    },
+    {
+      "component": "broker",
+      "event": "accepted",
+      "method": "GET",
+      "path": "/homeassistant-assist",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "broker",
+      "event": "request",
+      "method": "POST",
+      "path": "/homeassistant-assist",
+      "authorization": "present"
+    },
+    {
+      "component": "broker",
+      "event": "accepted",
+      "method": "POST",
+      "path": "/homeassistant-assist",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "broker",
+      "event": "upstream_client",
+      "upstreamAuthInjected": true,
+      "forwarded": true
+    },
+    {
+      "component": "upstream",
+      "event": "request",
+      "method": "POST",
+      "path": "/mcp",
+      "authorization": "present"
+    },
+    {
+      "component": "upstream",
+      "event": "accepted",
+      "method": "POST",
+      "path": "/mcp",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "upstream",
+      "event": "request",
+      "method": "POST",
+      "path": "/mcp",
+      "authorization": "present"
+    },
+    {
+      "component": "upstream",
+      "event": "accepted",
+      "method": "POST",
+      "path": "/mcp",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "upstream",
+      "event": "request",
+      "method": "GET",
+      "path": "/mcp",
+      "authorization": "present"
+    },
+    {
+      "component": "upstream",
+      "event": "accepted",
+      "method": "GET",
+      "path": "/mcp",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "upstream",
+      "event": "request",
+      "method": "POST",
+      "path": "/mcp",
+      "authorization": "present"
+    },
+    {
+      "component": "upstream",
+      "event": "accepted",
+      "method": "POST",
+      "path": "/mcp",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "broker",
+      "event": "request",
+      "method": "POST",
+      "path": "/homeassistant-assist",
+      "authorization": "present"
+    },
+    {
+      "component": "broker",
+      "event": "accepted",
+      "method": "POST",
+      "path": "/homeassistant-assist",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "broker",
+      "event": "request",
+      "method": "POST",
+      "path": "/homeassistant-assist",
+      "authorization": "present"
+    },
+    {
+      "component": "broker",
+      "event": "accepted",
+      "method": "POST",
+      "path": "/homeassistant-assist",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "broker",
+      "event": "request",
+      "method": "GET",
+      "path": "/homeassistant-assist",
+      "authorization": "present"
+    },
+    {
+      "component": "broker",
+      "event": "accepted",
+      "method": "GET",
+      "path": "/homeassistant-assist",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "broker",
+      "event": "request",
+      "method": "POST",
+      "path": "/homeassistant-assist",
+      "authorization": "present"
+    },
+    {
+      "component": "broker",
+      "event": "accepted",
+      "method": "POST",
+      "path": "/homeassistant-assist",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "broker",
+      "event": "upstream_client",
+      "upstreamAuthInjected": true,
+      "forwarded": true
+    },
+    {
+      "component": "upstream",
+      "event": "request",
+      "method": "POST",
+      "path": "/mcp",
+      "authorization": "present"
+    },
+    {
+      "component": "upstream",
+      "event": "accepted",
+      "method": "POST",
+      "path": "/mcp",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "upstream",
+      "event": "request",
+      "method": "POST",
+      "path": "/mcp",
+      "authorization": "present"
+    },
+    {
+      "component": "upstream",
+      "event": "accepted",
+      "method": "POST",
+      "path": "/mcp",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "upstream",
+      "event": "request",
+      "method": "GET",
+      "path": "/mcp",
+      "authorization": "present"
+    },
+    {
+      "component": "upstream",
+      "event": "accepted",
+      "method": "GET",
+      "path": "/mcp",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "upstream",
+      "event": "request",
+      "method": "POST",
+      "path": "/mcp",
+      "authorization": "present"
+    },
+    {
+      "component": "upstream",
+      "event": "accepted",
+      "method": "POST",
+      "path": "/mcp",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "broker",
+      "event": "request",
+      "method": "POST",
+      "path": "/homeassistant-advanced",
+      "authorization": "present"
+    },
+    {
+      "component": "broker",
+      "event": "accepted",
+      "method": "POST",
+      "path": "/homeassistant-advanced",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "broker",
+      "event": "request",
+      "method": "POST",
+      "path": "/homeassistant-advanced",
+      "authorization": "present"
+    },
+    {
+      "component": "broker",
+      "event": "accepted",
+      "method": "POST",
+      "path": "/homeassistant-advanced",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "broker",
+      "event": "request",
+      "method": "GET",
+      "path": "/homeassistant-advanced",
+      "authorization": "present"
+    },
+    {
+      "component": "broker",
+      "event": "accepted",
+      "method": "GET",
+      "path": "/homeassistant-advanced",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "broker",
+      "event": "request",
+      "method": "POST",
+      "path": "/homeassistant-advanced",
+      "authorization": "present"
+    },
+    {
+      "component": "broker",
+      "event": "accepted",
+      "method": "POST",
+      "path": "/homeassistant-advanced",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "broker",
+      "event": "upstream_client",
+      "upstreamAuthInjected": true,
+      "forwarded": true
+    },
+    {
+      "component": "upstream",
+      "event": "request",
+      "method": "POST",
+      "path": "/mcp",
+      "authorization": "present"
+    },
+    {
+      "component": "upstream",
+      "event": "accepted",
+      "method": "POST",
+      "path": "/mcp",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "upstream",
+      "event": "request",
+      "method": "POST",
+      "path": "/mcp",
+      "authorization": "present"
+    },
+    {
+      "component": "upstream",
+      "event": "accepted",
+      "method": "POST",
+      "path": "/mcp",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "upstream",
+      "event": "request",
+      "method": "GET",
+      "path": "/mcp",
+      "authorization": "present"
+    },
+    {
+      "component": "upstream",
+      "event": "accepted",
+      "method": "GET",
+      "path": "/mcp",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "upstream",
+      "event": "request",
+      "method": "POST",
+      "path": "/mcp",
+      "authorization": "present"
+    },
+    {
+      "component": "upstream",
+      "event": "accepted",
+      "method": "POST",
+      "path": "/mcp",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "broker",
+      "event": "upstream_client",
+      "upstreamAuthInjected": true,
+      "forwarded": true
+    },
+    {
+      "component": "broker",
+      "event": "upstream_error",
+      "errorClass": "TypeError",
+      "upstreamAuthInjected": true
+    },
+    {
+      "component": "broker",
+      "event": "upstream_client",
+      "upstreamAuthInjected": true,
+      "forwarded": true
+    },
+    {
+      "component": "upstream",
+      "event": "request",
+      "method": "POST",
+      "path": "/mcp",
+      "authorization": "present"
+    },
+    {
+      "component": "upstream",
+      "event": "accepted",
+      "method": "POST",
+      "path": "/mcp",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "upstream",
+      "event": "request",
+      "method": "POST",
+      "path": "/mcp",
+      "authorization": "present"
+    },
+    {
+      "component": "upstream",
+      "event": "accepted",
+      "method": "POST",
+      "path": "/mcp",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "upstream",
+      "event": "request",
+      "method": "GET",
+      "path": "/mcp",
+      "authorization": "present"
+    },
+    {
+      "component": "upstream",
+      "event": "accepted",
+      "method": "GET",
+      "path": "/mcp",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "upstream",
+      "event": "request",
+      "method": "POST",
+      "path": "/mcp",
+      "authorization": "present"
+    },
+    {
+      "component": "upstream",
+      "event": "accepted",
+      "method": "POST",
+      "path": "/mcp",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "broker",
+      "event": "request",
+      "method": "POST",
+      "path": "/homeassistant-assist",
+      "authorization": "present"
+    },
+    {
+      "component": "broker",
+      "event": "accepted",
+      "method": "POST",
+      "path": "/homeassistant-assist",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "broker",
+      "event": "request",
+      "method": "POST",
+      "path": "/homeassistant-assist",
+      "authorization": "present"
+    },
+    {
+      "component": "broker",
+      "event": "accepted",
+      "method": "POST",
+      "path": "/homeassistant-assist",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "broker",
+      "event": "request",
+      "method": "GET",
+      "path": "/homeassistant-assist",
+      "authorization": "present"
+    },
+    {
+      "component": "broker",
+      "event": "accepted",
+      "method": "GET",
+      "path": "/homeassistant-assist",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "broker",
+      "event": "request",
+      "method": "POST",
+      "path": "/homeassistant-assist",
+      "authorization": "present"
+    },
+    {
+      "component": "broker",
+      "event": "accepted",
+      "method": "POST",
+      "path": "/homeassistant-assist",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "broker",
+      "event": "upstream_client",
+      "upstreamAuthInjected": true,
+      "forwarded": true
+    },
+    {
+      "component": "upstream",
+      "event": "request",
+      "method": "POST",
+      "path": "/mcp",
+      "authorization": "present"
+    },
+    {
+      "component": "upstream",
+      "event": "accepted",
+      "method": "POST",
+      "path": "/mcp",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "upstream",
+      "event": "request",
+      "method": "POST",
+      "path": "/mcp",
+      "authorization": "present"
+    },
+    {
+      "component": "upstream",
+      "event": "accepted",
+      "method": "POST",
+      "path": "/mcp",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "upstream",
+      "event": "request",
+      "method": "GET",
+      "path": "/mcp",
+      "authorization": "present"
+    },
+    {
+      "component": "upstream",
+      "event": "accepted",
+      "method": "GET",
+      "path": "/mcp",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    },
+    {
+      "component": "upstream",
+      "event": "request",
+      "method": "POST",
+      "path": "/mcp",
+      "authorization": "present"
+    },
+    {
+      "component": "upstream",
+      "event": "accepted",
+      "method": "POST",
+      "path": "/mcp",
+      "status": 200,
+      "authorization": "present",
+      "authValid": true,
+      "forwarded": true
+    }
+  ]
+}

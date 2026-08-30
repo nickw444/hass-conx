@@ -1,0 +1,25 @@
+{
+  "source": "Spike 001 unauthenticated ACP initialize fixtures",
+  "protocolVersion": 1,
+  "codex": {
+    "agentCapabilities": {
+      "loadSession": true,
+      "sessionCapabilities": {
+        "resume": {},
+        "list": {},
+        "close": {},
+        "delete": {}
+      }
+    },
+    "authMethods": ["api-key", "chat-gpt-device-code"]
+  },
+  "cursor": {
+    "agentCapabilities": {
+      "loadSession": true,
+      "sessionCapabilities": {
+        "list": {}
+      }
+    },
+    "authMethods": ["cursor_login"]
+  }
+}

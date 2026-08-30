@@ -1,0 +1,31 @@
+name: "Hass Conx Protected HA Probe"
+version: "0.1.4"
+slug: "hass_conx_protected_ha_probe"
+description: >-
+  Disposable protected Home Assistant app harness for validating UID,
+  configuration-mount, bubblewrap, Ingress, and read-only Core MCP behavior.
+arch:
+  - amd64
+  - aarch64
+startup: application
+boot: manual_only
+ingress: true
+ingress_port: 8099
+ingress_stream: true
+panel_admin: true
+homeassistant_api: true
+apparmor: true
+map:
+  - type: homeassistant_config
+    read_only: false
+    path: /config
+options:
+  write_marker: false
+schema:
+  write_marker: bool
+backup: cold
+backup_exclude:
+  - "spike-008/*.json"
+  - "spike-008/backend-*"
+  - "spike-008/provider-*"
+stage: experimental

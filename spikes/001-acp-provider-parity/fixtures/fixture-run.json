@@ -1,0 +1,379 @@
+{
+  "schemaVersion": 1,
+  "provider": "fixture",
+  "mode": "fixture",
+  "command": "/opt/homebrew/Cellar/node/26.0.0/bin/node",
+  "args": [
+    "--import",
+    "tsx",
+    "src/probe.ts",
+    "--fixture-agent"
+  ],
+  "runtime": {
+    "node": "v26.0.0",
+    "platform": "darwin",
+    "arch": "arm64",
+    "sdk": "@agentclientprotocol/sdk@1.4.0",
+    "codexAcp": "@agentclientprotocol/codex-acp@1.7.0"
+  },
+  "tests": {
+    "initialize": {
+      "status": "passed",
+      "protocolVersion": 1,
+      "agentInfo": {
+        "name": "hass-conx-fixture-agent",
+        "version": "0.1.0"
+      },
+      "agentCapabilities": {
+        "loadSession": true,
+        "promptCapabilities": {
+          "image": false,
+          "audio": false,
+          "embeddedContext": true
+        },
+        "mcpCapabilities": {
+          "http": true,
+          "sse": true
+        },
+        "sessionCapabilities": {
+          "list": {},
+          "delete": {},
+          "resume": {},
+          "close": {},
+          "additionalDirectories": {}
+        }
+      }
+    },
+    "authStatus": {
+      "status": "observed",
+      "authMethods": [
+        {
+          "id": "fixture-key",
+          "name": "Fixture key",
+          "description": "Deterministic fixture authentication status"
+        }
+      ]
+    },
+    "sessionNew": {
+      "status": "passed",
+      "sessionId": "fixture-1788071478378-c1cda6"
+    },
+    "mcpInjection": {
+      "status": "passed",
+      "serverNames": [
+        "hass-conx-spike-mcp"
+      ],
+      "transport": "http",
+      "fixtureObserved": true
+    },
+    "promptStreaming": {
+      "status": "passed",
+      "stopReason": "end_turn",
+      "updateCount": 15
+    },
+    "permission": {
+      "status": "passed",
+      "requests": [
+        {
+          "sessionId": "fixture-1788071478378-c1cda6",
+          "toolCallId": "tool-edit",
+          "optionIds": [
+            "allow-once",
+            "reject-once"
+          ]
+        }
+      ],
+      "resolutions": [
+        {
+          "sessionId": "fixture-1788071478378-c1cda6",
+          "toolCallId": "tool-edit",
+          "optionId": "allow-once"
+        }
+      ]
+    },
+    "shellTerminal": {
+      "status": "passed",
+      "requests": [
+        {
+          "method": "terminal/create",
+          "command": "ha",
+          "args": [
+            "core",
+            "check"
+          ]
+        },
+        {
+          "method": "terminal/output",
+          "terminalId": "fixture-terminal"
+        },
+        {
+          "method": "terminal/wait_for_exit",
+          "terminalId": "fixture-terminal"
+        },
+        {
+          "method": "terminal/release",
+          "terminalId": "fixture-terminal"
+        }
+      ]
+    },
+    "fileEvents": {
+      "status": "passed",
+      "clientFileRequests": [
+        {
+          "method": "fs/read_text_file",
+          "path": "/Users/nickw/repos/hass-conx/spikes/001-acp-provider-parity/fixtures/configuration.yaml"
+        }
+      ]
+    },
+    "elicitation": {
+      "status": "passed",
+      "requests": [
+        {
+          "mode": "form",
+          "message": "Choose fixture value",
+          "sessionId": "fixture-1788071478378-c1cda6"
+        }
+      ]
+    },
+    "cancellation": {
+      "status": "passed",
+      "stopReason": "cancelled"
+    },
+    "processCrash": {
+      "status": "passed",
+      "exit": {
+        "code": null,
+        "signal": "SIGKILL"
+      }
+    },
+    "sessionResumeLoad": {
+      "status": "passed",
+      "sessionId": "fixture-1788071478378-c1cda6",
+      "historyReplayEvents": 1,
+      "modes": {
+        "currentModeId": "agent",
+        "availableModes": [
+          {
+            "id": "agent",
+            "name": "Agent",
+            "description": "Fixture mode"
+          }
+        ]
+      }
+    }
+  },
+  "normalizedEvents": [
+    {
+      "sequence": 1,
+      "sessionId": "fixture-1788071478378-c1cda6",
+      "kind": "thought.delta",
+      "data": {
+        "text": "checking ",
+        "messageId": "thought-1"
+      }
+    },
+    {
+      "sequence": 3,
+      "sessionId": "fixture-1788071478378-c1cda6",
+      "kind": "plan.updated",
+      "data": {
+        "updateType": "plan",
+        "entries": [
+          {
+            "content": "Inspect configuration",
+            "priority": "high",
+            "status": "in_progress"
+          }
+        ]
+      }
+    },
+    {
+      "sequence": 5,
+      "sessionId": "fixture-1788071478378-c1cda6",
+      "kind": "message.delta",
+      "data": {
+        "role": "assistant",
+        "text": "hello ",
+        "messageId": "message-1"
+      }
+    },
+    {
+      "sequence": 7,
+      "sessionId": "fixture-1788071478378-c1cda6",
+      "kind": "tool.started",
+      "data": {
+        "toolCallId": "tool-read",
+        "title": "Read configuration",
+        "name": null,
+        "kind": "read",
+        "status": "in_progress",
+        "locations": [
+          {
+            "path": "/Users/nickw/repos/hass-conx/spikes/001-acp-provider-parity/fixtures/configuration.yaml",
+            "line": 1
+          }
+        ]
+      },
+      "rawMeta": {
+        "rawInput": {
+          "path": "configuration.yaml"
+        },
+        "rawOutput": null
+      }
+    },
+    {
+      "sequence": 9,
+      "sessionId": "fixture-1788071478378-c1cda6",
+      "kind": "tool.completed",
+      "data": {
+        "toolCallId": "tool-read",
+        "status": "completed",
+        "title": null,
+        "locations": []
+      },
+      "rawMeta": {
+        "rawInput": null,
+        "rawOutput": {
+          "ok": true
+        }
+      }
+    },
+    {
+      "sequence": 11,
+      "sessionId": "fixture-1788071478378-c1cda6",
+      "kind": "permission.requested",
+      "data": {
+        "sessionId": "fixture-1788071478378-c1cda6",
+        "toolCallId": "tool-edit",
+        "optionIds": [
+          "allow-once",
+          "reject-once"
+        ]
+      }
+    },
+    {
+      "sequence": 12,
+      "sessionId": "fixture-1788071478378-c1cda6",
+      "kind": "permission.resolved",
+      "data": {
+        "sessionId": "fixture-1788071478378-c1cda6",
+        "toolCallId": "tool-edit",
+        "optionId": "allow-once"
+      }
+    },
+    {
+      "sequence": 13,
+      "sessionId": "fixture-1788071478378-c1cda6",
+      "kind": "tool.completed",
+      "data": {
+        "toolCallId": "tool-edit",
+        "title": "Edit automation",
+        "name": null,
+        "kind": "edit",
+        "status": "completed",
+        "locations": [
+          {
+            "path": "/Users/nickw/repos/hass-conx/spikes/001-acp-provider-parity/fixtures/automations.yaml",
+            "line": 4
+          }
+        ]
+      },
+      "rawMeta": {
+        "rawInput": null,
+        "rawOutput": {
+          "diff": "fixture"
+        }
+      }
+    },
+    {
+      "sequence": 14,
+      "sessionId": "fixture-1788071478378-c1cda6",
+      "kind": "file.changed",
+      "data": {
+        "toolCallId": "tool-edit",
+        "locations": [
+          {
+            "path": "/Users/nickw/repos/hass-conx/spikes/001-acp-provider-parity/fixtures/automations.yaml",
+            "line": 4
+          }
+        ],
+        "status": "completed"
+      }
+    },
+    {
+      "sequence": 15,
+      "sessionId": "fixture-1788071478378-c1cda6",
+      "kind": "terminal.started",
+      "data": {
+        "terminalId": "fixture-terminal",
+        "command": "ha"
+      }
+    },
+    {
+      "sequence": 16,
+      "sessionId": "fixture-1788071478378-c1cda6",
+      "kind": "terminal.output",
+      "data": {
+        "terminalId": "fixture-terminal",
+        "output": "fixture terminal output\n",
+        "truncated": false
+      }
+    },
+    {
+      "sequence": 17,
+      "sessionId": "fixture-1788071478378-c1cda6",
+      "kind": "terminal.completed",
+      "data": {
+        "terminalId": "fixture-terminal",
+        "exitCode": 0
+      }
+    },
+    {
+      "sequence": 18,
+      "sessionId": "fixture-1788071478378-c1cda6",
+      "kind": "elicitation.requested",
+      "data": {
+        "mode": "form",
+        "message": "Choose fixture value"
+      }
+    },
+    {
+      "sequence": 19,
+      "sessionId": "fixture-1788071478378-c1cda6",
+      "kind": "elicitation.resolved",
+      "data": {
+        "action": "accept"
+      }
+    },
+    {
+      "sequence": 20,
+      "sessionId": "fixture-1788071478378-c1cda6",
+      "kind": "message.delta",
+      "data": {
+        "role": "assistant",
+        "text": "done",
+        "messageId": "message-1"
+      }
+    },
+    {
+      "sequence": 22,
+      "sessionId": "fixture-1788071478378-c1cda6",
+      "kind": "message.delta",
+      "data": {
+        "role": "assistant",
+        "text": "starting ",
+        "messageId": "cancel-message"
+      }
+    },
+    {
+      "sequence": 1,
+      "sessionId": "fixture-1788071478378-c1cda6",
+      "kind": "message.delta",
+      "data": {
+        "role": "assistant",
+        "text": "fixture response",
+        "messageId": "history-1"
+      }
+    }
+  ]
+}

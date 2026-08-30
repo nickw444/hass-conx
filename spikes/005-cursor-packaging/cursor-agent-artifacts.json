@@ -1,0 +1,25 @@
+{
+  "observed_at": "2026-08-30",
+  "source": "https://downloads.cursor.com/lab/2026.08.25-3e8eec8",
+  "channel": "lab",
+  "version": "2026.08.25-3e8eec8",
+  "artifacts": {
+    "amd64": {
+      "url": "https://downloads.cursor.com/lab/2026.08.25-3e8eec8/linux/x64/agent-cli-package.tar.gz",
+      "sha256": "7a212e5a17ff9316f5acc78808e33c536940d5455645022e6388d99ba48c8425",
+      "content_length": 84518977,
+      "last_modified": "Tue, 25 Aug 2026 22:26:13 GMT",
+      "etag": "061fb2c7a821f0c177b4088f2974714b-11",
+      "x_amz_version_id": "8rqAfwlmsyzaZtg1fhGmmahBE5u9OHog"
+    },
+    "arm64": {
+      "url": "https://downloads.cursor.com/lab/2026.08.25-3e8eec8/linux/arm64/agent-cli-package.tar.gz",
+      "sha256": "f1c1c2330d89fa4ef5b6cc04fcffba15012ff50eacd07e0f3baec0716f25ac5d",
+      "content_length": 83111698,
+      "last_modified": "Tue, 25 Aug 2026 22:26:14 GMT",
+      "etag": "7415fa2f8c6b4b8de7b1e59435e268f1-10",
+      "x_amz_version_id": "X2PjwzzzsCqZ6.vVkgOD3rjG2Ova5zaV"
+    }
+  },
+  "verification_note": "The SHA-256 values are independently computed observations, not publisher-supplied checksums. ETags are multipart S3-style values and are not treated as cryptographic digests."
+}

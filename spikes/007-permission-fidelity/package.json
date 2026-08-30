@@ -1,0 +1,20 @@
+{
+  "name": "hass-conx-acp-permission-fidelity-spike",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "fixture": "tsx src/harness.ts --fixture",
+    "probe-real": "tsx src/probe-real.ts",
+    "test": "tsx --test src/*.test.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@agentclientprotocol/codex-acp": "1.7.0",
+    "@agentclientprotocol/sdk": "1.4.0",
+    "tsx": "4.23.12",
+    "typescript": "7.0.2"
+  },
+  "devDependencies": {
+    "@types/node": "26.1.0"
+  }
+}

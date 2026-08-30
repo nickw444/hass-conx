@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "provider": "codex",
+  "mode": "real-provider",
+  "command": "/Users/nickw/repos/hass-conx/spikes/001-acp-provider-parity/node_modules/@agentclientprotocol/codex-acp/dist/index.js",
+  "args": [],
+  "runtime": {
+    "node": "v26.0.0",
+    "platform": "darwin",
+    "arch": "arm64",
+    "sdk": "@agentclientprotocol/sdk@1.4.0",
+    "codexAcp": "@agentclientprotocol/codex-acp@1.7.0",
+    "providerBinary": "codex-acp package entrypoint",
+    "isolatedHome": true,
+    "processExit": {
+      "code": null,
+      "signal": "SIGTERM"
+    }
+  },
+  "tests": {
+    "initialize": {
+      "status": "passed",
+      "protocolVersion": 1,
+      "agentInfo": {
+        "name": "@agentclientprotocol/codex-acp",
+        "title": "Codex",
+        "version": "1.7.0"
+      },
+      "agentCapabilities": {
+        "auth": {
+          "logout": {}
+        },
+        "providers": {},
+        "loadSession": true,
+        "promptCapabilities": {
+          "embeddedContext": true,
+          "image": true
+        },
+        "sessionCapabilities": {
+          "resume": {},
+          "list": {},
+          "close": {},
+          "delete": {},
+          "additionalDirectories": {},
+          "subagents": {}
+        },
+        "mcpCapabilities": {
+          "acp": false,
+          "http": true,
+          "sse": false
+        }
+      }
+    },
+    "authStatus": {
+      "status": "observed",
+      "authMethods": [
+        {
+          "id": "api-key",
+          "name": "API Key",
+          "description": "Use an API key to authenticate",
+          "_meta": {
+            "api-key": "[REDACTED]"
+          }
+        },
+        {
+          "id": "chat-gpt-device-code",
+          "name": "ChatGPT (device code)",
+          "description": "Sign in to ChatGPT by opening a verification page and entering a one-time code"
+        }
+      ]
+    },
+    "sessionNew": {
+      "status": "failed",
+      "error": "RequestError: Authentication required"
+    },
+    "mcpInjection": {
+      "status": "inconclusive",
+      "reason": "session/new failed before MCP acceptance could be distinguished",
+      "error": "RequestError: Authentication required"
+    }
+  },
+  "normalizedEvents": []
+}

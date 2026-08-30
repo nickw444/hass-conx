@@ -1,0 +1,15 @@
+.DS_Store
+.env
+.env.local
+*.log
+
+# agent-teamd runtime: pidfile, unix socket, daemon log, per-instance metadata.
+# Definitions live in `.agent_team/agents/` (committed); runtime state is local-only.
+.agent_team/daemon.pid
+.agent_team/daemon.sock
+.agent_team/daemon/
+.agent_team/state/
+.agent_team/jobs/
+.agent_team/feedback/
+.agent_team/budget/
+.agent_team/outcomes/

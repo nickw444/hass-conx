@@ -13,20 +13,23 @@
 # explicit declaration overrides it. A runtime-family override clears inherited
 # model/effort unless new selectors are declared beside it. Keep this triple
 # topology-owned so launches never depend on a developer's runtime user config.
+# Shared Codex runtime. Per-seat model/effort below override this fallback.
 [model_policy]
 runtime = "codex"
-model   = "gpt-5.6-sol"
+model   = "gpt-5.6-luna"
 effort  = "xhigh"
 
 # Per-instance runtime overrides are optional:
 #   runtime     = "claude" | "codex" | "docker"
 #   runtime_bin = "claude"
-#   model       = "claude-fable-5"
-#   effort      = "max"
+#   model       = "gpt-5.6-terra"
+#   effort      = "medium"
 
 [instances.manager]
 agent       = "manager"
 ephemeral   = false
+model       = "gpt-5.6-terra"
+effort      = "high"
 description = "User-facing entry point. Coordinates workers, reviewers, and follow-up decisions."
 
 [[instances.manager.triggers]]
@@ -52,6 +55,8 @@ match.target = "manager"
 agent         = "worker"
 ephemeral     = true
 replicas      = 4
+model         = "gpt-5.6-luna"
+effort        = "xhigh"
 reap_worktree = "on_merge"   # reap the job worktree + local branch after its PR merges; `agent-team job keep-worktree <id>` opts one job out
 token_budget  = "40M"
 time_budget   = "45m"
@@ -69,6 +74,8 @@ match.target = "worker"
 agent        = "verifier"
 ephemeral    = true
 replicas     = 2
+model        = "gpt-5.6-luna"
+effort       = "high"
 token_budget = "5M"
 time_budget  = "20m"
 description  = "Deterministic verifier. Runs declared gates against worker commits and writes machine-readable evidence before review."
@@ -81,6 +88,8 @@ match.target = "verifier"
 agent       = "reviewer"
 ephemeral   = true
 replicas    = 3
+model       = "gpt-5.6-terra"
+effort      = "medium"
 token_budget = "10M"
 time_budget  = "30m"
 env_allow   = ["PATH", "HOME", "USER", "LOGNAME", "SHELL", "TMPDIR", "TERM", "TERM_PROGRAM", "LANG", "LC_*", "XDG_*", "CODEX_HOME", "CLAUDE_CODE_*", "SSH_AUTH_SOCK"]
@@ -90,12 +99,28 @@ description = "Adversarial content reviewer for worker PRs. Reads, verifies, rep
 event        = "agent.dispatch"
 match.target = "reviewer"
 
-# The field-proven pipeline shape (see documentation/operating-model.md):
-# dragging a Linear card or GitHub Project item into the configured
-# agent_column ("Ready for Agent" by default) is the dispatch gesture. The
-# zero-config alternative is:
-#   trigger.event = "ticket.created"
-#   # remove trigger.match.status
+# Persistent consult seat — not in any pipeline. Reach with
+# `inbox send advisor "..."` or `agent-team send advisor --reply-to manager "..."`.
+[instances.advisor]
+agent       = "advisor"
+ephemeral   = false
+model       = "gpt-5.6-terra"
+effort      = "high"
+env_allow   = ["PATH", "HOME", "USER", "LOGNAME", "SHELL", "TMPDIR", "TERM", "TERM_PROGRAM", "LANG", "LC_*", "XDG_*", "CODEX_HOME", "CLAUDE_CODE_*", "SSH_AUTH_SOCK"]
+description = "Persistent first-principles consultant for hard calls; does not implement or dispatch."
+
+[[instances.advisor.triggers]]
+event = "user_invocation"
+
+[[instances.advisor.triggers]]
+event        = "agent.dispatch"
+match.target = "advisor"
+
+# Dispatch gesture: move a hass-conx issue on
+# https://github.com/users/nickw444/projects/1 into Status "Ready for Agent",
+# then run `.agent_team/scripts/github-intake-poll.sh` (or publish the same
+# event). GitHub issue `opened` is github.opened, not ticket.created. Project
+# column moves become ticket.status_changed only after intake/poll sees them.
 #
 # Headless implement -> deterministic verify -> adversarial review chain on
 # process exit; the manual gate stops exactly where merge judgment is needed.
@@ -189,7 +214,7 @@ kickoff — do not amend the branch yourself.
 
 [teams.delivery]
 description = "Default software-delivery team for ticket intake, implementation, review, and merge."
-instances   = ["manager", "worker", "verifier", "reviewer"]
+instances   = ["manager", "worker", "verifier", "reviewer", "advisor"]
 pipelines   = ["ticket_to_pr"]
 
 
@@ -237,7 +262,8 @@ enforcement = "audit"
 [authority.instances.manager]
 allow = ["*"]
 
-
+[authority.instances.advisor]
+allow = ["inbox.*", "feedback.*", "status.*", "channel.*"]
 
 [authority.agents.worker]
 allow = ["budget.status", "channel.*", "event.publish", "feedback.*", "inbox.*", "job.events", "job.gate.*:own", "job.show", "job.step:own", "status.*"]
@@ -250,6 +276,9 @@ allow = ["budget.status", "channel.*", "feedback.*", "inbox.*", "job.events", "j
 
 [authority.agents.manager]
 allow = ["budget.status", "channel.*", "feedback.*", "inbox.*", "job.show", "status.*"]
+
+[authority.agents.advisor]
+allow = ["inbox.*", "feedback.*", "status.*", "channel.*"]
 
 
 

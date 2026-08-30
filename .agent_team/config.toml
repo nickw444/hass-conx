@@ -8,21 +8,28 @@
 # Provider sections for modes you are not using can stay blank.
 # Optional runtime, health, notification, label, and project fields can stay at defaults until needed.
 # After editing provider settings, run: agent-team doctor --commands
+#
+# GitHub Projects v2 board: https://github.com/users/nickw444/projects/1
+# Dispatch gesture: move an issue into Status = "Ready for Agent", then run
+# `.agent_team/scripts/github-intake-poll.sh` (until a webhook/intake server
+# can reach this host). The pipeline matches ticket.status_changed with that
+# exact status string. The `ready-for-agent` label is a backup ingest path.
+# Project API calls need `gh auth refresh -s read:project -s project`.
 
 [github]
   agent_column = "Ready for Agent"
   agent_id = ""
-  agent_login = ""
+  agent_login = "nickw444"
   attention_column = "Todo"
-  attention_label = ""
+  attention_label = "needs-attention"
   attention_state = "open"
   in_progress_column = "In Progress"
-  in_progress_label = ""
+  in_progress_label = "agent-work"
   in_progress_state = "open"
-  labels = []
+  labels = ["ready-for-agent"]
   owner = "nickw444"
   project_number = 1
-  project_owner = ""
+  project_owner = "nickw444"
   project_status_field = "Status"
   repo = "hass-conx"
 
@@ -60,3 +67,7 @@
 
 [template]
   profile = "slim"
+
+[runtime]
+kind = "codex"
+binary = "codex"

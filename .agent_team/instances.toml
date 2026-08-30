@@ -169,9 +169,7 @@ These declared gates are the smoke tier from `.agent_team/gates.toml`; do not
 claim acceptance or release readiness unless the required tier evidence exists.
 
 ```agent-team-verify-gates
-gofmt-check :: test -z "$(gofmt -l .)"
-go-vet :: go vet ./...
-go-test :: go test ./...
+ci-pr-checks :: "$AGENT_TEAM_ROOT/scripts/ci-pr-checks.sh"
 ```
 """
 

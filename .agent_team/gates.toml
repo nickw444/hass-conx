@@ -1,13 +1,13 @@
-# Machine-readable gate tiers for the bundled template.
+# Machine-readable gate tiers for hass-conx.
 #
-# The core contract is release honesty: a smoke pass is only a smoke claim.
-# Acceptance and release claims require their own evidence. A release claim
-# missing required evidence must fail instead of silently inheriting smoke.
+# Smoke is CI on the worker PR when workflows exist. With no workflows yet,
+# the CI gate records an explicit no-op pass so the pipeline can proceed.
+# Acceptance and release still require their own evidence.
 
 schema_version = 1
 
 [tiers.smoke]
-description = "Fast local gates that should run before PR handoff."
+description = "CI / mechanical checks that should pass before adversarial review."
 evidence_required = false
 
 [tiers.acceptance]
@@ -19,7 +19,7 @@ description = "Release-readiness gates that prove all release evidence is presen
 evidence_required = true
 
 [claims.smoke]
-description = "Local smoke confidence only. This does not claim acceptance or release readiness."
+description = "Smoke confidence only. This does not claim acceptance or release readiness."
 required_tiers = ["smoke"]
 
 [claims.acceptance]
@@ -32,24 +32,10 @@ required_tiers = ["smoke", "acceptance", "release"]
 missing_evidence = "fail"
 
 [[gates]]
-id = "gofmt-check"
+id = "ci-pr-checks"
 tier = "smoke"
-description = "Go files are gofmt-clean."
-command = 'test -z "$(gofmt -l .)"'
-required_for = ["smoke", "acceptance", "release"]
-
-[[gates]]
-id = "go-vet"
-tier = "smoke"
-description = "Go vet completes successfully."
-command = "go vet ./..."
-required_for = ["smoke", "acceptance", "release"]
-
-[[gates]]
-id = "go-test"
-tier = "smoke"
-description = "Go tests complete successfully."
-command = "go test ./..."
+description = "GitHub Actions checks on the worker PR are green (no-op pass when no workflows exist)."
+command = "./.agent_team/scripts/ci-pr-checks.sh"
 required_for = ["smoke", "acceptance", "release"]
 
 [[gates]]
@@ -75,12 +61,4 @@ tier = "release"
 description = "Release build, publish, and asset verification evidence exists."
 evidence_required = true
 evidence_hint = "Release workflow run URL plus artifact manifest, checksum log, or downloadable asset verification."
-required_for = ["release"]
-
-[[gates]]
-id = "local-only-dependency-audit"
-tier = "release"
-description = "Local-only templates have audited cloud, network, telemetry, API-key, token, download, and hosted-PM dependencies."
-evidence_required = true
-evidence_hint = "Audit report path or evidence artifact. If not applicable, record explicit non-local applicability evidence."
 required_for = ["release"]
